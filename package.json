@@ -1,0 +1,21 @@
+{
+  "name": "agentic-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitindiwakar123/Agentic-AI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/nitindiwakar123/Agentic-AI/issues"
+  },
+  "homepage": "https://github.com/nitindiwakar123/Agentic-AI#readme"
+}
