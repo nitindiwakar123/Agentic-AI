@@ -1,6 +1,6 @@
 import { ChatMistralAI } from "@langchain/mistralai";
-import {config} from "dotenv";
-import {createInterface} from "node:readline/promises";
+import { config } from "dotenv";
+import { createInterface } from "node:readline/promises";
 
 config();
 
@@ -14,17 +14,24 @@ const model = new ChatMistralAI({
 const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: "> "
 });
 
-rl.prompt();
+let context = "";
 
-rl.on('line', async (line: string) => {
-    const iterator = await model.stream(line);
+while (true) {
 
-    for await (const chunk of iterator) {
-        process.stdout.write(chunk.text);   
+    const userPrompt = await rl.question("> ");
+
+    context += `
+    user: ${userPrompt}
+    AI: `;
+
+    const streamIterator = await model.stream(context);
+
+    for await (const chunk of streamIterator) {
+        process.stdout.write(chunk.text);
+        context += `${chunk.text}`;
     }
 
-    rl.prompt();
-});
+    process.stdout.write("\n");
+}
