@@ -4,8 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nitindiwakar123/Agentic-AI.git"
@@ -17,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/nitindiwakar123/Agentic-AI/issues"
   },
-  "homepage": "https://github.com/nitindiwakar123/Agentic-AI#readme"
+  "homepage": "https://github.com/nitindiwakar123/Agentic-AI#readme",
+  "dependencies": {
+    "@langchain/mistralai": "^1.2.0",
+    "langchain": "^1.5.9"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
 }
