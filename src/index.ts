@@ -1,4 +1,5 @@
 import { ChatMistralAI } from "@langchain/mistralai";
+import { HumanMessage, AIMessage, SystemMessage, BaseMessage } from "langchain";
 import { config } from "dotenv";
 import { createInterface } from "node:readline/promises";
 
@@ -16,22 +17,24 @@ const rl = createInterface({
     output: process.stdout,
 });
 
-let context = "";
+const messages: BaseMessage[] = [
+    new SystemMessage(`Your name is shreya! and you are my girlfriend. Today's date: ${new Date()}`)
+];
 
-while (true) {
-
+while (true) {    
     const userPrompt = await rl.question("> ");
 
-    context += `
-    user: ${userPrompt}
-    AI: `;
+    messages.push(new HumanMessage(userPrompt));
 
-    const streamIterator = await model.stream(context);
+    const streamIterator = await model.stream(messages);
 
+    let aiResponse = "";
     for await (const chunk of streamIterator) {
         process.stdout.write(chunk.text);
-        context += `${chunk.text}`;
+        aiResponse += `${chunk.text}`;
     }
+
+    messages.push(new AIMessage(aiResponse));
 
     process.stdout.write("\n");
 }
